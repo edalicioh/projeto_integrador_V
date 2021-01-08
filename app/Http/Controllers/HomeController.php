@@ -13,17 +13,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
-    }
-
-    /**
-     * Undocumented function
-     *
-     * @param  Illuminate\Http\Request $request
-     * @return void
-     */
-    public function indexJwt(Request $request)
-    {
-        return json_encode($request->all());
+        return view('dashboard.home.index');
     }
 }
