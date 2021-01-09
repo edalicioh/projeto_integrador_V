@@ -34353,3 +34353,12 @@ a.text-muted:hover {
   color: #ced4da;
 }
 
+[class*=sidebar-dark-] {
+  background-color: #002400;
+}
+
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active,
+.sidebar-light-primary .nav-sidebar > .nav-item > .nav-link.active {
+  background-color: #365239;
+}
+
