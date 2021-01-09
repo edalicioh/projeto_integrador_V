@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Frequencie;
 use Illuminate\Http\Request;
 
-class FrequencieController extends Controller
+class FrequencyController extends Controller
 {
     /**
      * Display a listing of the resource.
