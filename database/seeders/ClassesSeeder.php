@@ -25,18 +25,20 @@ class ClassesSeeder extends Seeder
         $students = Student::all()->toArray();
 
 
-        foreach ($classes as  $class) {
-
+        foreach ($users as  $user) {
             $userClass = [
-                'user_id' => random_int(1, count($users)),
-                'class_id' => $class['id'],
-            ];
-            $studentClass = [
-                'student_id' => random_int(1, count($students)),
-                'class_id' => $class['id'],
+                'user_id' => $user['id'],
+                'class_id' => random_int(1, count($classes)),
             ];
 
             DB::table('user_class')->insert($userClass);
+        }
+        foreach ($students as  $student) {
+            $studentClass = [
+                'student_id' => $student['id'],
+                'class_id' => random_int(1, count($classes)),
+            ];
+
             DB::table('student_Class')->insert($studentClass);
         }
     }

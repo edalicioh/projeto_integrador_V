@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\r;
+use App\Models\Classes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ClassesController extends Controller
 {
@@ -14,7 +16,13 @@ class ClassesController extends Controller
      */
     public function index()
     {
-        //
+        $userId = Auth::user()->id;
+        $userClass = DB::table('user_class')->where('user_id', $userId)
+            ->join('classes', 'user_class.class_id', 'classes.id')
+            ->get();
+
+
+        return view('dashboard.home.index', compact('userClass'));
     }
 
     /**
@@ -41,21 +49,32 @@ class ClassesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\r  $r
+     * @param  \App\Models\Classes
      * @return \Illuminate\Http\Response
      */
-    public function show(r $r)
+    public function show($classes)
     {
-        //
+        $class = DB::table('student_Class')->where('class_id', $classes)
+            ->join('periods', 'student_Class.class_id', 'periods.id')
+            ->join('classes', 'student_Class.class_id', 'classes.id')
+            ->first();
+
+
+        $students = DB::table('student_Class')->where('class_id', $classes)
+            ->join('students', 'student_Class.student_id', 'students.id')
+            ->get();
+
+
+        return view('dashboard.classes.show', compact(['class', 'students']));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\r  $r
+     * @param  \App\Models\Classes $classes
      * @return \Illuminate\Http\Response
      */
-    public function edit(r $r)
+    public function edit(Classes $classes)
     {
         //
     }
@@ -64,10 +83,10 @@ class ClassesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\r  $r
+     * @param  \App\Models\Classes $classes
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, r $r)
+    public function update(Request $request, Classes $classes)
     {
         //
     }
@@ -75,10 +94,10 @@ class ClassesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\r  $r
+     * @param  \App\Models\Classes $classes
      * @return \Illuminate\Http\Response
      */
-    public function destroy(r $r)
+    public function destroy(Classes $classes)
     {
         //
     }

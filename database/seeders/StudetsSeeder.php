@@ -16,7 +16,7 @@ class StudetsSeeder extends Seeder
      */
     public function run()
     {
-        $studets = Student::factory()->count(100)->create()->toArray();
+        $studets = Student::factory()->count(1000)->create()->toArray();
 
         $users = User::where('user_type', 'PAI')->get()->toArray();
 
