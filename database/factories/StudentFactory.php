@@ -22,7 +22,10 @@ class StudentFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'full_name' => $this->faker->name,
+            'date_birth' => $this->faker->date(),
+            'registration' => $this->faker->randomNumber(6, true),
+            'gender' => $this->faker->randomElements(['M', 'F', 'O'])[0],
         ];
     }
 }

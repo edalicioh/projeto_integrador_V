@@ -22,7 +22,8 @@ class ClassesFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'period' => $this->faker->randomElements(['M', 'V'])[0],
+            'class_number' => $this->faker->randomNumber(3, true),
         ];
     }
 }

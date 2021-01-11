@@ -14,18 +14,20 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        $user = [
-            'full_name' => "coordenação",
-            'phone'     => '21212121',
-            'cpf'       => '212121',
-            'gender'    =>  'M',
-            'user_type' => 'PRO',
-            'email' => 'cor@cor.com',
-            'login' => "pro",
-            'password' => bcrypt('cor'),
+        User::create([
+            'full_name' => 'admin',
+            'phone'     => 1111,
+            'cpf'       => 111,
+            'gender'    => 'M',
+            'user_type' => 'COR',
+            'email'     => 'admin@admin.com',
+            'login'     => 'admin',
+            'password' => bcrypt('password')
+        ]);
 
-        ];
-
-        User::create($user);
+        User::factory()->count(50)->create();
+        User::factory()->count(50)->create([
+            'user_type' => 'PAI'
+        ]);
     }
 }

@@ -22,7 +22,9 @@ class PeriodFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'begins_class' => $this->faker->date(),
+            'end_classes' => $this->faker->date(),
+            'class_cycle' => random_int(1, 4),
         ];
     }
 }

@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Note extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
+
+    protected $fillable = [
+        'title',
+        'comment',
+        'date',
+        'user_class_id',
+    ];
 }

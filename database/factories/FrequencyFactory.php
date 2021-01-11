@@ -22,7 +22,8 @@ class FrequencyFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'data' => $this->faker->dateTimeBetween('-1 month'),
+            'presence' => $this->faker->boolean(),
         ];
     }
 }

@@ -14,5 +14,11 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         (new UsersSeeder())->run();
+        (new StudetsSeeder())->run();
+        (new ClassesSeeder())->run();
+        (new NoteSeeder())->run();
+        (new PeriodSeeder())->run();
+        (new GradesSeeder())->run();
+        (new FrequencySeeder())->run();
     }
 }

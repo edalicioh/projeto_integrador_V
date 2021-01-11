@@ -14,7 +14,7 @@ class CreateStudentsTable extends Migration
     public function up()
     {
         Schema::create('students', function (Blueprint $table) {
-             /**
+            /**
              *
              * ID | INT
              * full_name | VARCHAR
@@ -27,7 +27,7 @@ class CreateStudentsTable extends Migration
             $table->string('full_name')->nullable(false);       // Nome Completo
             $table->date('date_birth')->nullable(false);        // Data de nacimento
             $table->integer('registration')->nullable(false);   // Numero da matricula
-            $table->enum('gender' , ['M', 'F' , 'O'])->nullable(false); // Genero
+            $table->enum('gender', ['M', 'F', 'O'])->nullable(false); // Genero
 
         });
         // cria a tabela de ligacao de studants com o user

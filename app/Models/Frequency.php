@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Frequency extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
+
+    protected $fillable = [
+        'data',
+        'presence',
+        'period_id',
+    ];
 }

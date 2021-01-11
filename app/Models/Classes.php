@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Classes extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
+
+
+    protected $fillable = [
+        'period',
+        'class_number'
+    ];
 }
