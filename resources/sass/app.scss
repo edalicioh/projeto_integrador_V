@@ -20,3 +20,25 @@
         position: absolute !important;
         right: 10px !important;
 }
+
+.check-student-list {
+    cursor: pointer;
+}
+
+.check-student-list:hover {
+     background-color: $primary-ligth;
+     color: white;
+}
+.icon-class{
+    font-size: 3rem;
+}
+.small-box-check {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-radius: 10px;
+}
+
+.small-box-check:hover {
+    background-color: $primary-ligth !important;
+}

@@ -60,12 +60,9 @@ class ClassesController extends Controller
             ->first();
 
 
-        $students = DB::table('student_Class')->where('class_id', $classes)
-            ->join('students', 'student_Class.student_id', 'students.id')
-            ->get();
 
 
-        return view('dashboard.classes.show', compact(['class', 'students']));
+        return view('dashboard.classes.show', compact(['class']));
     }
 
     /**
