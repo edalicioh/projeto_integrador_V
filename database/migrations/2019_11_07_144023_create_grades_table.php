@@ -14,18 +14,11 @@ class CreateGradesTable extends Migration
     public function up()
     {
         Schema::create('grades', function (Blueprint $table) {
-            /**
-             *
-             * ID | INT
-             * date | DATE
-             * grade | DOUBLE
-             * periods_id
-             */
             $table->bigIncrements('id');
-            $table->date('date')->nullable(false)->comment('Define a data em que o trabalho ou prova foi aplicada');
-            $table->double('grade', 8, 2)->nullable(false)->comment('Define a nota do estudante');
-            $table->unsignedBigInteger('periods_id');
-            $table->foreign('periods_id')->references('id')->on('periods');
+            $table->date('date')->nullable(false);
+            $table->double('grade', 8, 2)->nullable(false);
+            $table->unsignedBigInteger('student_id');
+            $table->foreign('student_id')->references('id')->on('students');
         });
     }
 

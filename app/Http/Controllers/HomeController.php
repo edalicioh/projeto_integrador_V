@@ -23,6 +23,7 @@ class HomeController extends Controller
             ->get();
 
 
+
         return view('dashboard.home.index', compact('userClass'));
     }
 }

@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Frequency;
-use App\Models\Period;
+use App\Models\Student;
 use Illuminate\Database\Seeder;
 
 class FrequencySeeder extends Seeder
@@ -15,10 +15,10 @@ class FrequencySeeder extends Seeder
      */
     public function run()
     {
-        $periods = Period::all();
+        $students = Student::all();
 
-        foreach ($periods as $period) {
-            Frequency::factory()->create(['periods_id' => $period->id]);
+        foreach ($students as $student) {
+            Frequency::factory()->create(['student_id' => $student->id]);
         }
     }
 }

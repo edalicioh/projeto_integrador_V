@@ -14,6 +14,9 @@ class Classes extends Model
 
     protected $fillable = [
         'period',
-        'class_number'
+        'class_number',
+        'begins_class',
+        'end_classes',
+        'class_cycle',
     ];
 }

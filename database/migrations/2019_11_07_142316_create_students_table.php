@@ -14,25 +14,18 @@ class CreateStudentsTable extends Migration
     public function up()
     {
         Schema::create('students', function (Blueprint $table) {
-            /**
-             *
-             * ID | INT
-             * full_name | VARCHAR
-             * date_birth | DATE
-             * registration | INT
-             * gender | VARCHAR
-             *
-             */
+
             $table->bigIncrements('id');                        // ID
             $table->string('full_name')->nullable(false);       // Nome Completo
             $table->date('date_birth')->nullable(false);        // Data de nacimento
             $table->integer('registration')->nullable(false);   // Numero da matricula
-            $table->enum('gender', ['M', 'F', 'O'])->nullable(false); // Genero
+            $table->string('gender', 1)->nullable(false); // Genero
 
+            $table->unsignedBigInteger('class_id');
+            $table->foreign('class_id')->references('id')->on('classes');
         });
-        // cria a tabela de ligacao de studants com o user
-        Schema::create('studentHasUser', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('user_student', function (Blueprint $table) {
+            $table->bigIncrements('id');    // ID
 
             $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('user_id');
@@ -49,6 +42,7 @@ class CreateStudentsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('user_student');
         Schema::dropIfExists('students');
     }
 }

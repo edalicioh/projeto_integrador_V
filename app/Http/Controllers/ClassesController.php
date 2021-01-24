@@ -21,7 +21,6 @@ class ClassesController extends Controller
             ->join('classes', 'user_class.class_id', 'classes.id')
             ->get();
 
-
         return view('dashboard.home.index', compact('userClass'));
     }
 
@@ -54,13 +53,7 @@ class ClassesController extends Controller
      */
     public function show($classes)
     {
-        $class = DB::table('student_Class')->where('class_id', $classes)
-            ->join('periods', 'student_Class.class_id', 'periods.id')
-            ->join('classes', 'student_Class.class_id', 'classes.id')
-            ->first();
-
-
-
+        $class = Classes::where('id', $classes)->first();
 
         return view('dashboard.classes.show', compact(['class']));
     }

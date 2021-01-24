@@ -42,3 +42,15 @@
 .small-box-check:hover {
     background-color: $primary-ligth !important;
 }
+td.fc-daygrid-day{
+    cursor: pointer;
+}
+
+td.fc-daygrid-day:hover {
+    background: $primary-ligth;
+    color: white;
+}
+td.fc-day-today{
+    background-color: $primary !important;
+    color: white;
+}

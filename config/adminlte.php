@@ -312,11 +312,11 @@ return [
             ],
         ],
         'Chartjs' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js',
                 ],
             ],
@@ -331,18 +331,24 @@ return [
                 ],
             ],
         ],
-        'Pace' => [
-            'active' => false,
+        'Fullcalendar' => [
+            'active' => true,
             'files' => [
                 [
                     'type' => 'css',
-                    'asset' => false,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-center-radar.min.css',
+                    'asset' => true,
+                    'location' => '//cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.min.css',
                 ],
                 [
                     'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js',
+                    'asset' => true,
+                    'location' => '//cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.min.js',
+                ],
+
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => '//cdn.jsdelivr.net/npm/fullcalendar@5.5.0/locales/pt-br.min.js',
                 ],
             ],
         ],

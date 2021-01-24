@@ -2,97 +2,78 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classes;
 use App\Models\Frequencie;
+use App\Models\Frequency;
+use App\Models\Period;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class FrequencyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show($classes)
+    public function show($classesId)
     {
 
-        $class = DB::table('student_Class')->where('class_id', $classes)
-            ->join('periods', 'student_Class.class_id', 'periods.id')
-            ->join('classes', 'student_Class.class_id', 'classes.id')
-            ->first();
+
+        $class = Classes::where('id', $classesId)->first();
 
 
-        $students = DB::table('student_Class')->where('class_id', $classes)
-            ->join('students', 'student_Class.student_id', 'students.id')
-            ->limit(30)
+        $students = Student::where('class_id', $classesId)
             ->orderBy('full_name')
+            ->limit(30)
             ->get();
-
 
         return view('dashboard.frequency.show', compact(['class', 'students']));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Frequencie  $frequencie
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Frequencie $frequencie)
+    public function showCalendar($classesId)
     {
-        //
+        return view('dashboard.frequency.calendar', compact('classesId'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Frequencie  $frequencie
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Frequencie $frequencie)
+    public function getFrequencyByDate(Request $request)
     {
-        //
+        $date =  $request->json('date');
+        $classesId = $request->json('classesId');
+
+        $class = Student::where('class_id', $classesId)
+            ->join('frequencies', 'students.id', 'frequencies.student_id')
+            ->whereDate('data', $date)
+            ->get();
+
+
+        $todal = count($class);
+        if ($todal == 0) return response()->json([], 200);
+
+        $presences = $class->groupBy('presence');
+        $presence = count($presences[true]);
+        $notPresence = count($presences[false]);
+
+        $percentagePresence = [
+            number_format(($presence / $todal) * 100, 2),
+            number_format(($notPresence / $todal) * 100, 2)
+        ];
+
+
+        return response()->json($percentagePresence, 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Frequencie  $frequencie
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Frequencie $frequencie)
+    public function storeFrequencyByDate(Request $request)
     {
-        //
+        $date = date('Y-m-d');
+
+        $students  = json_decode($request->students);
+
+        foreach ($students as $i =>  $value) {
+            Frequency::create([
+                'data' => $date,
+                'presence' => !isset($value->presence) ? false : $value->presence,
+                'student_id' => $value->id
+            ]);
+        }
     }
 }

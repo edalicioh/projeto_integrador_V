@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Classes;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 
 class StudetsSeeder extends Seeder
@@ -16,9 +18,18 @@ class StudetsSeeder extends Seeder
      */
     public function run()
     {
-        $studets = Student::factory()->count(1000)->create()->toArray();
+        $classes = Classes::all();
 
-        $users = User::where('user_type', 'PAI')->get()->toArray();
+
+        for ($i = 0; $i < 300; $i++) {
+            Student::factory()
+                ->create(['class_id' => random_int(1, count($classes))])
+                ->toArray();
+        }
+
+        $studets = Student::all();
+
+        $users = User::where('user_type', Config::get('constants.USER_TYPE.PAI'))->get()->toArray();
 
         foreach ($studets as  $student) {
 
@@ -26,7 +37,7 @@ class StudetsSeeder extends Seeder
                 'user_id' => random_int(1, count($users)),
                 'student_id' => $student['id'],
             ];
-            DB::table('studentHasUser')->insert($userStudet);
+            DB::table('user_student')->insert($userStudet);
         }
     }
 }

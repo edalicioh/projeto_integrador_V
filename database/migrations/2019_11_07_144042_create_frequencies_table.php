@@ -14,19 +14,13 @@ class CreateFrequenciesTable extends Migration
     public function up()
     {
         Schema::create('frequencies', function (Blueprint $table) {
-            /**
-             *
-             * ID | INT
-             * data | DATE
-             * presence | TINYINT
-             * period_id | INT
-             *
-             */
+
             $table->bigIncrements('id');
             $table->date('data')->nullable(false);
             $table->boolean('presence')->nullable(false);
-            $table->unsignedBigInteger('periods_id');
-            $table->foreign('periods_id')->references('id')->on('periods');
+
+            $table->unsignedBigInteger('student_id');
+            $table->foreign('student_id')->references('id')->on('students');
         });
     }
 

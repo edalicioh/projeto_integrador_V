@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Grades;
-use App\Models\Period;
+use App\Models\Student;
 use Illuminate\Database\Seeder;
 
 class GradesSeeder extends Seeder
@@ -15,10 +15,10 @@ class GradesSeeder extends Seeder
      */
     public function run()
     {
-        $periods = Period::all();
+        $students = Student::all();
 
-        foreach ($periods as $period) {
-            Grades::factory()->create(['periods_id' => $period->id]);
+        foreach ($students as $student) {
+            Grades::factory()->create(['student_id' => $student->id]);
         }
     }
 }

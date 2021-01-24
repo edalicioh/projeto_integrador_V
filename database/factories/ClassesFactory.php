@@ -24,6 +24,9 @@ class ClassesFactory extends Factory
         return [
             'period' => $this->faker->randomElements(['M', 'V'])[0],
             'class_number' => $this->faker->randomNumber(3, true),
+            'begins_class' => $this->faker->date(),
+            'end_classes' => $this->faker->date(),
+            'class_cycle' => random_int(1, 4),
         ];
     }
 }

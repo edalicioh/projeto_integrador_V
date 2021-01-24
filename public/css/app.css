@@ -34391,3 +34391,17 @@ a.text-muted:hover {
   background-color: #365239 !important;
 }
 
+td.fc-daygrid-day {
+  cursor: pointer;
+}
+
+td.fc-daygrid-day:hover {
+  background: #365239;
+  color: white;
+}
+
+td.fc-day-today {
+  background-color: #002400 !important;
+  color: white;
+}
+

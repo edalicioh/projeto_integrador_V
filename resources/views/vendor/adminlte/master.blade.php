@@ -87,6 +87,8 @@
     @include('adminlte::plugins', ['type' => 'js'])
 
     <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+
 
     {{-- Livewire Script --}}
     @if (config('adminlte.livewire'))

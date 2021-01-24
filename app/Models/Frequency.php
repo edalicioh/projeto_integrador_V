@@ -14,6 +14,6 @@ class Frequency extends Model
     protected $fillable = [
         'data',
         'presence',
-        'period_id',
+        'student_id',
     ];
 }
